@@ -206,6 +206,17 @@
         transform: translateY(-10px);
       }
 
+      .photo-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .photo-item:hover img {
+        transform: scale(1.05);
+      }
+
       .photo-placeholder {
         height: 250px;
         background: linear-gradient(45deg, var(--accent-color), #fce7f3);
@@ -226,6 +237,28 @@
         color: var(--primary-color);
         margin-bottom: 10px;
         font-size: 1.3rem;
+      }
+
+      /* Photo Controls */
+      .photo-controls {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .btn-secondary {
+        background: var(--accent-color);
+        color: var(--primary-color);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        margin: 0 10px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary-color);
+        color: white;
       }
 
       /* Memory Timeline */
@@ -400,6 +433,35 @@
       .animate-on-scroll {
         animation: fadeInUp 0.6s ease-out;
       }
+
+      /* Loading animation */
+      .loading {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .photo-item.loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        margin: -15px 0 0 -15px;
+        border: 3px solid var(--accent-color);
+        border-top: 3px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -435,7 +497,7 @@
             Now, I can't imagine my days without you. I love how we watch movies
             together by sharing screens, laughing and talking as if we're side
             by side. And playing MLBB with you makes me so happy, because every
-            moment <em>(except kill stealing 😄)</em> with you feels special, no
+            moment <em>(except kill steal 😄)</em> with you feels special, no
             matter what we're doing.
           </div>
           <div class="letter-text">
@@ -468,76 +530,23 @@
       <div class="container-custom">
         <h2 class="section-title">Our Beautiful Moments</h2>
         <p class="section-subtitle">Every picture tells our love story</p>
-        <!-- https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.42.55.jpeg?raw=true -->
-        <div class="photo-grid">
-          <div class="photo-item">
-            <img
-            src=https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.42.55.jpeg?raw=true"
-            alt="Description" style="width: 100%; height: 250px; object-fit:
-            cover;">
-            <div class="photo-caption">
-              <h4>First Photo Together</h4>
-              <p>the beginning of our beautiful journey</p>
-            </div>
-          </div>
 
-          <div class="photo-item">
-            <img
-              src="https://github.com/jayythecracker/5months/blob/main/%20mvp-kasil.jpeg?raw=true"
-              alt="Description"
-              style="width: 100%; height: 250px; object-fit: cover"
-            />
-            <div class="photo-caption">
-              <h4>MVP</h4>
-              <p>Photoshop:3</p>
-            </div>
-          </div>
-          <!-- https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.48.42.jpeg?raw=true -->
-          <div class="photo-item">
-            <img
-              src="https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.48.42.jpeg?raw=true"
-              alt="Description"
-              style="width: 100%; height: 250px; object-fit: cover"
-            />
+        <!-- Photo Controls -->
+        <div class="photo-controls">
+          <button class="btn btn-secondary" onclick="shufflePhotos()">
+            <i class="fas fa-random"></i> Shuffle Photos
+          </button>
+          <button class="btn btn-secondary" onclick="showAllPhotos()">
+            <i class="fas fa-th"></i> Show All
+          </button>
+          <button class="btn btn-secondary" onclick="showFavorites()">
+            <i class="fas fa-heart"></i> Favorites Only
+          </button>
+        </div>
 
-            <div class="photo-caption">
-              <h4>MVP</h4>
-              <p>Me real</p>
-            </div>
-          </div>
-
-          <div class="photo-item">
-            <img
-              src="https://github.com/jayythecracker/5months/blob/main/ingame.jpeg?raw=true"
-              alt="Description"
-              style="width: 100%; height: 250px; object-fit: cover"
-            />
-
-            <div class="photo-caption">
-              <h4>Together</h4>
-              <p>Thu lite kyaik</p>
-            </div>
-          </div>
-
-          <div class="photo-item">
-            <div class="photo-placeholder">
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="photo-caption">
-              <h4>Special Day</h4>
-              <p>Photo from a special day you both remember fondly</p>
-            </div>
-          </div>
-
-          <div class="photo-item">
-            <div class="photo-placeholder">
-              <i class="fas fa-infinity"></i>
-            </div>
-            <div class="photo-caption">
-              <h4>Forever</h4>
-              <p>The most recent photo - showing how your love keeps growing</p>
-            </div>
-          </div>
+        <!-- Dynamic Photo Grid -->
+        <div class="photo-grid" id="photoGrid">
+          <!-- Photos will be loaded here dynamically -->
         </div>
       </div>
     </section>
@@ -647,17 +656,104 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // Smooth scroll to letter
+      // ===== PHOTO GALLERY DATA =====
+      // Add your photos here - just modify this array!
+      const photoData = [
+        {
+          url: "https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.42.55.jpeg?raw=true",
+          title: "First Photo Together",
+          caption: 'Me shat"',
+          favorite: true,
+        },
+        {
+          url: "https://github.com/jayythecracker/5months/blob/main/%20mvp-kasil.jpeg?raw=true",
+          title: "MVP",
+          caption: "Photoshop:3",
+          favorite: false,
+        },
+        {
+          url: "https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.48.42.jpeg?raw=true",
+          title: "MVP",
+          caption: "Me real",
+          favorite: true,
+        },
+        {
+          url: "https://github.com/jayythecracker/5months/blob/main/ingame.jpeg?raw=true",
+          title: "Together",
+          caption: "Thu lite kyaik",
+          favorite: false,
+        },
+        {
+          url: "https://github.com/jayythecracker/5months/blob/main/loading.jpg?raw=true",
+          title: "Flexing",
+          caption: "Lvl 5 kwa",
+          favorite: false,
+        },
+        {
+          url: "https://github.com/jayythecracker/5months/blob/main/call.jpeg?raw=true",
+          title: "Call",
+          caption: "The longest call I have ever had.",
+          favorite: true,
+        },
+      ];
+
+      // Current displayed photos
+      let currentPhotos = [...photoData];
+
+      // ===== PHOTO GALLERY FUNCTIONS =====
+      function createPhotoItem(photo, index) {
+        return `
+          <div class="photo-item animate-on-scroll" style="animation-delay: ${
+            index * 0.1
+          }s">
+            <img
+              src="${photo.url}"
+              alt="${photo.title}"
+              loading="lazy"
+              onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZjhiYmQ5Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZTkxZTYzIiBmb250LXNpemU9IjE2Ij5JbWFnZSBOb3QgRm91bmQ8L3RleHQ+Cjwvc3ZnPg=='"
+            />
+            <div class="photo-caption">
+              <h4>${photo.title} ${photo.favorite ? "💕" : ""}</h4>
+              <p>${photo.caption}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderPhotos(photos = currentPhotos) {
+        const photoGrid = document.getElementById("photoGrid");
+        photoGrid.innerHTML = photos.map(createPhotoItem).join("");
+
+        // Re-observe new elements for animation
+        const newElements = photoGrid.querySelectorAll(".photo-item");
+        newElements.forEach((el) => observer.observe(el));
+      }
+
+      function shufflePhotos() {
+        const shuffled = [...currentPhotos].sort(() => Math.random() - 0.5);
+        currentPhotos = shuffled;
+        renderPhotos();
+      }
+
+      function showAllPhotos() {
+        currentPhotos = [...photoData];
+        renderPhotos();
+      }
+
+      function showFavorites() {
+        currentPhotos = photoData.filter((photo) => photo.favorite);
+        renderPhotos();
+      }
+
+      // ===== OTHER FUNCTIONS =====
       function scrollToLetter() {
         document.getElementById("loveLetter").scrollIntoView({
           behavior: "smooth",
         });
       }
 
-      // Countdown timer
       function updateCountdown() {
-        // Set your anniversary start date here (format: YYYY-MM-DD)
-        const anniversaryStart = new Date("2025-02-14"); // Change this to your actual date
+        const anniversaryStart = new Date("2025-02-14");
         const now = new Date();
         const timeDiff = now - anniversaryStart;
 
@@ -671,18 +767,14 @@
         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-        document.getElementById("months").textContent = months;
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
+        document.getElementById("months").textContent = Math.max(0, months);
+        document.getElementById("days").textContent = Math.max(0, days);
+        document.getElementById("hours").textContent = Math.max(0, hours);
+        document.getElementById("minutes").textContent = Math.max(0, minutes);
+        document.getElementById("seconds").textContent = Math.max(0, seconds);
       }
 
-      // Update countdown every second
-      setInterval(updateCountdown, 1000);
-      updateCountdown();
-
-      // Animation on scroll
+      // Animation observer
       const observerOptions = {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px",
@@ -696,10 +788,18 @@
         });
       }, observerOptions);
 
-      // Observe elements for animation
+      // ===== INITIALIZATION =====
       document.addEventListener("DOMContentLoaded", () => {
+        // Render initial photos
+        renderPhotos();
+
+        // Start countdown
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Observe elements for animation
         const elements = document.querySelectorAll(
-          ".photo-item, .timeline-item, .countdown-item"
+          ".timeline-item, .countdown-item"
         );
         elements.forEach((el) => observer.observe(el));
       });
