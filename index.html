@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy 5th Month Anniversary! 💕</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #e91e63;
+        --secondary-color: #ad1457;
+        --accent-color: #f8bbd9;
+        --text-color: #2c3e50;
+        --light-bg: #fdf2f8;
+        --white: #ffffff;
+        --shadow: 0 10px 30px rgba(233, 30, 99, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #fdf2f8 0%,
+          #fce7f3 50%,
+          #f3e8ff 100%
+        );
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      .container-custom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" fill="%23e91e63" opacity="0.1" font-size="12">♥</text></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        background: var(--white);
+        padding: 80px 60px;
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        max-width: 700px;
+        position: relative;
+        z-index: 2;
+        border: 1px solid rgba(233, 30, 99, 0.1);
+      }
+
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero .subtitle {
+        font-size: 1.3rem;
+        color: var(--secondary-color);
+        margin-bottom: 40px;
+        font-weight: 500;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        border: none;
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(233, 30, 99, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+      }
+
+      /* Love Letter Section */
+      .love-letter {
+        padding: 100px 0;
+        background: var(--white);
+      }
+
+      .letter-card {
+        background: var(--light-bg);
+        padding: 60px;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        position: relative;
+        border-left: 5px solid var(--primary-color);
+      }
+
+      .letter-card::before {
+        content: '"';
+        font-size: 120px;
+        color: var(--accent-color);
+        position: absolute;
+        top: -20px;
+        left: 30px;
+        font-family: "Playfair Display", serif;
+        line-height: 1;
+      }
+
+      .letter-text {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        color: var(--text-color);
+        position: relative;
+        z-index: 2;
+      }
+
+      .signature {
+        text-align: right;
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        margin-top: 40px;
+        font-style: italic;
+      }
+
+      /* Photo Gallery Section */
+      .photo-gallery {
+        padding: 100px 0;
+        background: var(--light-bg);
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--text-color);
+        margin-bottom: 60px;
+        opacity: 0.8;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .photo-item {
+        background: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s ease;
+      }
+
+      .photo-item:hover {
+        transform: translateY(-10px);
+      }
+
+      .photo-placeholder {
+        height: 250px;
+        background: linear-gradient(45deg, var(--accent-color), #fce7f3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        font-size: 3rem;
+      }
+
+      .photo-caption {
+        padding: 25px;
+        text-align: center;
+      }
+
+      .photo-caption h4 {
+        font-family: "Playfair Display", serif;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+
+      /* Memory Timeline */
+      .memory-timeline {
+        padding: 100px 0;
+        background: var(--white);
+      }
+
+      .timeline-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 60px;
+        position: relative;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: -60px;
+        width: 2px;
+        background: var(--accent-color);
+        transform: translateX(-50%);
+      }
+
+      .timeline-item:last-child::before {
+        display: none;
+      }
+
+      .timeline-content {
+        background: var(--light-bg);
+        padding: 40px;
+        border-radius: 15px;
+        width: 45%;
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: auto;
+      }
+
+      .timeline-icon {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-color);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        z-index: 2;
+      }
+
+      .timeline-title {
+        font-family: "Playfair Display", serif;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      /* Countdown Section */
+      .countdown {
+        padding: 100px 0;
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+      }
+
+      .countdown h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 30px;
+        max-width: 800px;
+        margin: 50px auto 0;
+      }
+
+      .countdown-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px 20px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .countdown-number {
+        font-size: 3rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .countdown-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--text-color);
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+      }
+
+      .footer h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 20px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-content {
+          padding: 40px 30px;
+          margin: 20px;
+        }
+
+        .letter-card {
+          padding: 40px 30px;
+        }
+
+        .timeline-item {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .timeline-content {
+          width: 100%;
+          margin: 20px 0 !important;
+        }
+
+        .timeline-item::before {
+          display: none;
+        }
+
+        .timeline-icon {
+          position: relative;
+          left: auto;
+          transform: none;
+          margin: 20px auto;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-on-scroll {
+        animation: fadeInUp 0.6s ease-out;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content animate-on-scroll">
+        <h1>Happy 5th Month Anniversary!</h1>
+        <p class="subtitle">To the most amazing girl in my world 💕</p>
+        <button class="btn btn-primary" onclick="scrollToLetter()">
+          <i class="fas fa-heart"></i> Read My Letter
+        </button>
+      </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="love-letter">
+      <div class="container-custom">
+        <div class="letter-card" id="loveLetter">
+          <div class="letter-text">
+            <strong>Baby, do you know something?</strong> When we first met, I
+            never imagined you would become my girlfriend. I just thought you
+            were a really sweet girl. Even when I found out you were my friend's
+            girlfriend, I never thought you would ever be mine.
+          </div>
+          <div class="letter-text">
+            I'm not exactly sure how things changed or how we ended up together,
+            but I'm so glad we did. Even though I thought I was just a rebound,
+            and even when things got complicated with May and Mew, you always
+            understood me and stayed by my side. You're such a caring and loving
+            girl, and somehow, I just fell for you without even realizing it.
+          </div>
+          <div class="letter-text">
+            Now, I can't imagine my days without you. I love how we watch movies
+            together by sharing screens, laughing and talking as if we're side
+            by side. And playing MLBB with you makes me so happy, because every
+            moment <em>(except kill stealing 😄)</em> with you feels special, no
+            matter what we're doing.
+          </div>
+          <div class="letter-text">
+            <strong>Please don't ever leave me.</strong> Let's always stay
+            together, no matter what happens. No matter how many arguments or
+            problems we face, I promise we'll get through them as long as we're
+            together.
+          </div>
+          <div class="letter-text">
+            Even if we're far apart, I trust you and I'm waiting for the day we
+            can be together again. From these five months to many more
+            years—let's build a future together, with our own little family,
+            full of love and happiness.
+          </div>
+          <div class="letter-text">
+            <strong>Thank you for being my everything.</strong> I love you more
+            every single day. Let's keep making beautiful memories, side by
+            side, forever. 💕
+          </div>
+          <div class="signature">
+            With all my love,<br />
+            Your Ruki ❤️
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="photo-gallery">
+      <div class="container-custom">
+        <h2 class="section-title">Our Beautiful Moments</h2>
+        <p class="section-subtitle">Every picture tells our love story</p>
+        <!-- https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.42.55.jpeg?raw=true -->
+        <div class="photo-grid">
+          <div class="photo-item">
+            <img
+            src=https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.42.55.jpeg?raw=true"
+            alt="Description" style="width: 100%; height: 250px; object-fit:
+            cover;">
+            <div class="photo-caption">
+              <h4>First Photo Together</h4>
+              <p>
+                Replace this with your first photo together - the beginning of
+                our beautiful journey
+              </p>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <div class="photo-placeholder">
+              <i class="fas fa-heart"></i>
+            </div>
+            <div class="photo-caption">
+              <h4>Movie Night</h4>
+              <p>
+                Add a screenshot from one of your movie nights - sharing screens
+                and hearts
+              </p>
+            </div>
+          </div>
+          <!-- https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.48.42.jpeg?raw=true -->
+          <div class="photo-item">
+            <img
+              src="https://github.com/rukix01/5months-anni/blob/main/photo_2025-06-14%2000.48.42.jpeg?raw=true"
+              alt="Description"
+              style="width: 100%; height: 250px; object-fit: cover"
+            />
+
+            <div class="photo-caption">
+              <h4>MVP</h4>
+              <p>Me pro:3</p>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <div class="photo-placeholder">
+              <i class="fas fa-smile"></i>
+            </div>
+            <div class="photo-caption">
+              <h4>Happy Moment</h4>
+              <p>Your favorite selfie or photo that makes you both smile</p>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <div class="photo-placeholder">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="photo-caption">
+              <h4>Special Day</h4>
+              <p>Photo from a special day you both remember fondly</p>
+            </div>
+          </div>
+
+          <div class="photo-item">
+            <div class="photo-placeholder">
+              <i class="fas fa-infinity"></i>
+            </div>
+            <div class="photo-caption">
+              <h4>Forever</h4>
+              <p>The most recent photo - showing how your love keeps growing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memory Timeline -->
+    <section class="memory-timeline">
+      <div class="container-custom">
+        <h2 class="section-title">Our Love Story Timeline</h2>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fas fa-heart-broken"></i>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">First Meeting</h3>
+            <p>
+              When we first met, I thought you were just a really sweet girl.
+              Little did I know you would become my everything.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Feelings Growing</h3>
+            <p>
+              Somehow, I just fell for you without even realizing it. You always
+              understood me and stayed by my side.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Becoming Us</h3>
+            <p>
+              I'm not sure how we ended up together, but I'm so glad we did. You
+              became my girlfriend and my best friend.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fas fa-calendar-heart"></i>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">5 Months Strong</h3>
+            <p>
+              Today we celebrate 5 beautiful months together. Every moment with
+              you feels special, no matter what we're doing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown">
+      <div class="container-custom">
+        <h2>Time Since We Became Us</h2>
+        <p>Every second with you is precious</p>
+
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-number" id="months">5</span>
+            <span class="countdown-label">Months</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="days">0</span>
+            <span class="countdown-label">Days</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="hours">0</span>
+            <span class="countdown-label">Hours</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="minutes">0</span>
+            <span class="countdown-label">Minutes</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="seconds">0</span>
+            <span class="countdown-label">Seconds</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container-custom">
+        <h3>Forever and Always</h3>
+        <p>Made with ❤️ for the most amazing girl in the world</p>
+        <p style="margin-top: 20px; opacity: 0.8">
+          "In all the world, there is no heart for me like yours. In all the
+          world, there is no love for you like mine."
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Smooth scroll to letter
+      function scrollToLetter() {
+        document.getElementById("loveLetter").scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+
+      // Countdown timer
+      function updateCountdown() {
+        // Set your anniversary start date here (format: YYYY-MM-DD)
+        const anniversaryStart = new Date("2025-02-14"); // Change this to your actual date
+        const now = new Date();
+        const timeDiff = now - anniversaryStart;
+
+        const months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+        const days = Math.floor(
+          (timeDiff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
+        );
+        const hours = Math.floor(
+          (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        document.getElementById("months").textContent = months;
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+      }
+
+      // Update countdown every second
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      // Animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-on-scroll");
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll(
+          ".photo-item, .timeline-item, .countdown-item"
+        );
+        elements.forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
